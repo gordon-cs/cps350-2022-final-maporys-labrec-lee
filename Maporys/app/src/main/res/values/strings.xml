@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Maporys</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="review_entry">Review Entry</string>
+    <string name="new_entry">New Entry</string>
+    <string name="cancel">Cancel</string>
+    <string name="_5_4_22">5/4/22</string>
+    <string name="gordon_college">Gordon College</string>
+    <string name="location">Location</string>
+    <string name="date">Date</string>
+    <string name="text">Text</string>
+    <string name="save_entry">Save Entry</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
