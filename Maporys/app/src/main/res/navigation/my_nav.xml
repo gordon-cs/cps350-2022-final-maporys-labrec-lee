@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/mainFragment4">
+    <fragment
+        android:id="@+id/newEntryFragment2"
+        android:name="com.example.maporys.NewEntryFragment"
+        android:label="fragment_new_entry"
+        tools:layout="@layout/fragment_new_entry" >
+        <action
+            android:id="@+id/navigateToNewEntry"
+            app:destination="@id/mainFragment4" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment4"
+        android:name="com.example.maporys.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/navigateMainFragment"
+            app:destination="@id/newEntryFragment2" />
+    </fragment>
+</navigation>

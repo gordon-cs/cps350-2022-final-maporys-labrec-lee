@@ -1,16 +1,15 @@
-import android.R
+package com.example.maporys
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val fragment: Fragment = MainFragment()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
-            .addToBackStack(null).commit()
+
+        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
     }
 }
