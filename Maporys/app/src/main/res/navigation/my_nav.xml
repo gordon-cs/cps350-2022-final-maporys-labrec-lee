@@ -10,7 +10,7 @@
         android:label="fragment_new_entry"
         tools:layout="@layout/fragment_new_entry" >
         <action
-            android:id="@+id/navigateToNewEntry"
+            android:id="@+id/newEntryFragmentToMainFragment"
             app:destination="@id/mainFragment4" />
     </fragment>
     <fragment
@@ -18,7 +18,15 @@
         android:name="com.example.maporys.MainFragment"
         android:label="MainFragment" >
         <action
-            android:id="@+id/navigateMainFragment"
+            android:id="@+id/mainFragmentToNewEntryFragment"
             app:destination="@id/newEntryFragment2" />
+        <action
+            android:id="@+id/mainFragmentToReviewEntry"
+            app:destination="@id/reviewEntryFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/reviewEntryFragment"
+        android:name="com.example.maporys.ReviewEntryFragment"
+        android:label="fragment_review_entry"
+        tools:layout="@layout/fragment_review_entry" />
 </navigation>
