@@ -25,6 +25,5 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             val action = MainFragmentDirections.mainFragmentToReviewEntry()
             findNavController().navigate(action)
         }
-
     }
 }

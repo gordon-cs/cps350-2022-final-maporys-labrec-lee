@@ -6,8 +6,7 @@ import com.google.android.gms.maps.model.LatLng
 
 @Entity(tableName = "entry_table")
 data class Entry (
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    // @PrimaryKey(autoGenerate = true)
     val date: String,
     val text: String,
     val latLng: LatLng

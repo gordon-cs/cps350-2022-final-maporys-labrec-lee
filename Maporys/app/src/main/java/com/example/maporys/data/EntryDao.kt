@@ -12,6 +12,6 @@ interface EntryDao{
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addEntry(Entry: Entry)
 
-    @Query("SELECT * FROM entry_table ORDER BY id ASC")
+    @Query("SELECT * FROM entry_table ORDER BY date ASC")
     fun readAllData(): LiveData<List<Entry>>
 }

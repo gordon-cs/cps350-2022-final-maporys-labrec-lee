@@ -1,8 +1,11 @@
+
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
     id "kotlin-android-extensions"
+    id 'kotlin-kapt'
     id("androidx.navigation.safeargs.kotlin")
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
@@ -60,14 +63,15 @@ dependencies {
 
     // Room components
     implementation "androidx.room:room-runtime:2.4.2"
-    //kapt "androidx.room:room-compiler:2.2.5"
     implementation "androidx.room:room-ktx:2.4.2"
+    kapt "androidx.room:room-compiler:2.2.5"
     androidTestImplementation "androidx.room:room-testing:2.4.2"
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.4.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    kapt "android.arch.lifecycle:compiler:2.4.1"
 
     // Kotlin components
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30"
