@@ -38,4 +38,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(gordon).title("GoRdOn CoLlEgE"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(gordon, 16F))
     }
+
+    companion object Markers {
+        var markerList = mutableListOf(LatLng(42.59, -70.82))
+
+    }
 }

@@ -54,5 +54,10 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback {
         val gordon = LatLng(42.59, -70.82)
         mMap.addMarker(MarkerOptions().position(gordon).title("GoRdOn CoLlEgE"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(gordon, 16F))
+
+        for (location in MainActivity.markerList) {
+            mMap.addMarker(MarkerOptions().position(location).title("Jenks"))
+        }
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(gordon, 16F))
     }
 }
