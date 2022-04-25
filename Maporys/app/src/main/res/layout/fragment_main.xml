@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainFragment">
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.fragment.app.FragmentContainerView
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="600dp"/>
+        android:layout_height="600dp"
+        tools:context=".MapsActivity"/>
 
     <Button
         android:id="@+id/reviewEntryButton"
