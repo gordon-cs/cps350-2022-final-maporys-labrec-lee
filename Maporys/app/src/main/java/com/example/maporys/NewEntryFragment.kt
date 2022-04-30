@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.example.maporys.data.Entry
+//import com.example.maporys.data.EntryViewModel
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_new_entry.*
@@ -15,14 +18,24 @@ import kotlinx.android.synthetic.main.fragment_new_entry.view.*
 
 
 class NewEntryFragment : Fragment(R.layout.fragment_new_entry) {
+
+    //private lateinit var  mEntryViewModel: EntryViewModel
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java)
+
         cancelButton.setOnClickListener {
             val action = NewEntryFragmentDirections.newEntryFragmentToMainFragment()
             findNavController().navigate(action)
         }
 
         saveButton.setOnClickListener {
+
+            addEntryToDatabase()
+
+
             MainActivity.markerList.add(LatLng(42.588685469711784,
                                                 -70.81906923188963))
 //            Toast(context).showCustomToast (entryInputMultiLine.text.toString(), context)
@@ -32,6 +45,17 @@ class NewEntryFragment : Fragment(R.layout.fragment_new_entry) {
             val action = NewEntryFragmentDirections.newEntryFragmentToMainFragment()
             findNavController().navigate(action)
         }
+
+    }
+
+    private fun addEntryToDatabase() {
+        val date = dateText.text.toString()
+        val text = entryInputMultiLine.text.toString()
+        // Make this dynamic
+        val latLng = LatLng(42.59081468624028, -70.82377840632842)
+
+        val entry = Entry(0, date, text, latLng)
+//        mEntryViewModel.addEntry(entry)
 
     }
 }
