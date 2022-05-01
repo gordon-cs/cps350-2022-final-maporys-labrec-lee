@@ -25,7 +25,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
+class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
+    ActivityCompat.OnRequestPermissionsResultCallback {
 
     private var permissionDenied = false
     private lateinit var mMap: GoogleMap
@@ -39,8 +40,14 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback, Activ
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
+        val mapFragment = SupportMapFragment.newInstance()
+        childFragmentManager
+            .beginTransaction()
+            // This adds the map fragment to the container we choose.
+            .replace(R.id.map, mapFragment)
+            .commitNow()
 
-        val mapFragment = childFragmentManager
+        childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
