@@ -11,5 +11,7 @@ data class Entry (
     val id: Int,
     val date: String,
     val text: String,
-    val latLng: LatLng
+    val lat: Double,
+    val lng: Double
+
 )

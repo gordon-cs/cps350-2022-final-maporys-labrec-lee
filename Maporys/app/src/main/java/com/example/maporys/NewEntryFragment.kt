@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.maporys.data.Entry
+import com.example.maporys.data.EntryViewModel
 //import com.example.maporys.data.EntryViewModel
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -19,12 +20,12 @@ import kotlinx.android.synthetic.main.fragment_new_entry.view.*
 
 class NewEntryFragment : Fragment(R.layout.fragment_new_entry) {
 
-    //private lateinit var  mEntryViewModel: EntryViewModel
+    private lateinit var  mEntryViewModel: EntryViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java)
+        mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java)
 
         cancelButton.setOnClickListener {
             val action = NewEntryFragmentDirections.newEntryFragmentToMainFragment()
@@ -54,8 +55,8 @@ class NewEntryFragment : Fragment(R.layout.fragment_new_entry) {
         // Make this dynamic
         val latLng = LatLng(42.59081468624028, -70.82377840632842)
 
-        val entry = Entry(0, date, text, latLng)
-//        mEntryViewModel.addEntry(entry)
+        val entry = Entry(0, date, text, latLng.latitude, latLng.longitude)
+        mEntryViewModel.addEntry(entry)
 
     }
 }

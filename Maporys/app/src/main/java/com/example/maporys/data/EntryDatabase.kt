@@ -11,9 +11,9 @@ abstract class EntryDatabase: RoomDatabase() {
     abstract fun entryDao(): EntryDao
 
     companion object {
-        // @Volatile
-        // private var INSTANCE: EntryDatabase? = null
-        var INSTANCE: EntryDatabase? = null
+        @Volatile
+        private var INSTANCE: EntryDatabase? = null
+//        var INSTANCE: EntryDatabase? = null
 
 
         fun getDatabase(context: Context): EntryDatabase? {

@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //db = EntryDatabase.getDatabase(context = this)
+        db = EntryDatabase.getDatabase(context = this)
 
         val mapFragment = SupportMapFragment.newInstance()
         //Special transactions for fragments
