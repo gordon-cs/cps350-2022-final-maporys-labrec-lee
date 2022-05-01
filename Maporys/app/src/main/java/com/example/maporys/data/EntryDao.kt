@@ -10,12 +10,14 @@ interface EntryDao{
     fun addEntry(entry: Entry)
 
     @Update
-    fun updateGender(entry: Entry)
+    fun updateEntry(entry: Entry)
 
     @Delete
-    fun deleteGender(entry: Entry)
+    fun deleteEntry(entry: Entry)
 
     @Query("SELECT * FROM entry_table ORDER BY id ASC")
     fun readAllData(): LiveData<List<Entry>>
 
+    @Query("SELECT * FROM entry_table ORDER BY id ASC")
+    fun getEntries(): List<Entry>
 }

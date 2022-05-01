@@ -75,7 +75,7 @@
         android:text="@string/text"
         android:textStyle="bold" />
 
-    <TextView
+    <EditText
         android:id="@+id/locationText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,6 +83,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:editable="true"
         android:text="42.5884, -70.819063" />
     <!--        android:text="42.588685469711784, -70.81906923188963"-->
 

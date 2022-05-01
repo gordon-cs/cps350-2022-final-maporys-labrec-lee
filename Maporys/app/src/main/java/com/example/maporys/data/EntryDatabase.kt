@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import kotlin.reflect.KParameter
 
 @Database(entities = [Entry::class], version = 1)
 abstract class EntryDatabase: RoomDatabase() {
@@ -16,7 +17,7 @@ abstract class EntryDatabase: RoomDatabase() {
 //        var INSTANCE: EntryDatabase? = null
 
 
-        fun getDatabase(context: Context): EntryDatabase? {
+        fun getDatabase(context: Context): EntryDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -24,11 +25,13 @@ abstract class EntryDatabase: RoomDatabase() {
 
             // Create new instance if there is none
             synchronized(EntryDatabase::class) {
-                val instance = Room.databaseBuilder(
+                val instanceBuilder = Room.databaseBuilder(
                     context.applicationContext,
                     EntryDatabase::class.java,
                     "entry_database"
-                ).build()
+                )
+                instanceBuilder.allowMainThreadQueries()
+                val instance = instanceBuilder.build()
                 INSTANCE = instance
                 return instance
             }

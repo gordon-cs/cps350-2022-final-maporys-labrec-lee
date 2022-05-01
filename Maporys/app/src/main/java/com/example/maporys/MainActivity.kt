@@ -1,13 +1,18 @@
 package com.example.maporys
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.maporys.data.EntryDatabase
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.example.maporys.MainFragment
+import com.example.maporys.data.Entry
+import com.example.maporys.data.EntryViewModel
 import com.google.android.gms.maps.model.MarkerOptions
 
 
@@ -34,16 +39,17 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-
-        // Add a marker in Sydney and move the camera
-        val gordon = LatLng(42.59, -70.82)
-        mMap.addMarker(MarkerOptions().position(gordon).title("GoRdOn CoLlEgE"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(gordon, 16F))
+        displayMarkers(googleMap)
     }
 
-    companion object Markers {
-        var markerList = mutableListOf(LatLng(42.59, -70.82))
-
+    fun displayMarkers(mMap : GoogleMap) {
+        val entryViewModel = ViewModelProvider(this)[EntryViewModel::class.java]
+        if (!entryViewModel.readAllData.isNullOrEmpty()) {
+            for (entry in entryViewModel.readAllData) {
+                Log.d("display", entry.text.toString())
+                val location = LatLng(entry.lat.toDouble(), entry.lng.toDouble())
+                mMap.addMarker(MarkerOptions().position(location))
+            }
+        }
     }
 }
