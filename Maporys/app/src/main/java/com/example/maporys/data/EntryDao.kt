@@ -17,4 +17,5 @@ interface EntryDao{
 
     @Query("SELECT * FROM entry_table ORDER BY id ASC")
     fun readAllData(): LiveData<List<Entry>>
+
 }

@@ -27,12 +27,7 @@ class NewEntryFragment : Fragment(R.layout.fragment_new_entry) {
         }
 
         saveButton.setOnClickListener {
-
             addEntryToDatabase()
-
-
-            MainActivity.markerList.add(LatLng(42.588685469711784,
-                                                -70.81906923188963))
 //            Toast(context).showCustomToast (entryInputMultiLine.text.toString(), context)
             val message = entryInputMultiLine.text.toString()
             var toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
@@ -46,10 +41,12 @@ class NewEntryFragment : Fragment(R.layout.fragment_new_entry) {
     private fun addEntryToDatabase() {
         val date = dateText.text.toString()
         val text = entryInputMultiLine.text.toString()
-        // Make this dynamic
-        val latLng = LatLng(42.59081468624028, -70.82377840632842)
+        val locVals = locationText.text.toString().split(", ")
+        val lat = locVals[0]
+        val long = locVals[1]
 
-        val entry = Entry(0, date, text, latLng.latitude, latLng.longitude)
+
+        val entry = Entry(0, date, text, lat, long)
         mEntryViewModel.addEntry(entry)
 
     }
