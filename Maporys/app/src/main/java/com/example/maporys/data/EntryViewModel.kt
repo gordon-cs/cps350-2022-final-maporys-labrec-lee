@@ -13,7 +13,7 @@ class EntryViewModel(application: Application): AndroidViewModel(application) {
     private val repository: EntryRepository
 
     init {
-        val entryDao = EntryDatabase.getDatabase(application).entryDao()
+        val entryDao = EntryDatabase.getDatabase(application)!!.entryDao()
         repository = EntryRepository(entryDao)
         readAllData = repository.readAllData
     }

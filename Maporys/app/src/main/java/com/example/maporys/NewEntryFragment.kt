@@ -1,30 +1,33 @@
 package com.example.maporys
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.maporys.data.Entry
+import com.example.maporys.data.EntryViewModel
 import com.google.android.gms.maps.model.LatLng
-import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_new_entry.*
-import kotlinx.android.synthetic.main.fragment_new_entry.view.*
 
 
 class NewEntryFragment : Fragment(R.layout.fragment_new_entry) {
+
+    private lateinit var  mEntryViewModel: EntryViewModel
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java)
+
         cancelButton.setOnClickListener {
             val action = NewEntryFragmentDirections.newEntryFragmentToMainFragment()
             findNavController().navigate(action)
         }
 
         saveButton.setOnClickListener {
-            MainActivity.markerList.add(LatLng(42.588685469711784,
-                                                -70.81906923188963))
+            addEntryToDatabase()
 //            Toast(context).showCustomToast (entryInputMultiLine.text.toString(), context)
             val message = entryInputMultiLine.text.toString()
             var toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
@@ -32,6 +35,19 @@ class NewEntryFragment : Fragment(R.layout.fragment_new_entry) {
             val action = NewEntryFragmentDirections.newEntryFragmentToMainFragment()
             findNavController().navigate(action)
         }
+
+    }
+
+    private fun addEntryToDatabase() {
+        val date = dateText.text.toString()
+        val text = entryInputMultiLine.text.toString()
+        val locVals = locationText.text.toString().split(", ")
+        val lat = locVals[0]
+        val long = locVals[1]
+
+
+        val entry = Entry(0, date, text, lat, long)
+        mEntryViewModel.addEntry(entry)
 
     }
 }
