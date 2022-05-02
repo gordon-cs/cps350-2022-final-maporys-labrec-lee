@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(),
         db = EntryDatabase.getDatabase(context = this)
 
     }
-    
+
     companion object Markers {
         var markerList = mutableListOf(LatLng(42.59, -70.82))
     }

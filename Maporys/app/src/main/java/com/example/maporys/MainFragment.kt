@@ -33,6 +33,9 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
     private var db: EntryDatabase? = null
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient : FusedLocationProviderClient
+    private var latitude = "0.0"
+    private var longitude = "0.0"
+
 
     override fun onCreateView (
         inflater: LayoutInflater,
@@ -58,7 +61,8 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         newEntryButton.setOnClickListener {
-            val action = MainFragmentDirections.mainFragmentToNewEntryFragment()
+
+            val action = MainFragmentDirections.mainFragmentToNewEntryFragment(latitude, longitude)
             findNavController().navigate(action)
         }
         reviewEntryButton.setOnClickListener {
@@ -92,6 +96,10 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
                 if (location != null) {
                     lastLocation = location
                     val currentLatLong = LatLng(location.latitude, location.longitude)
+
+                    latitude = location.latitude.toString()
+                    longitude = location.longitude.toString()
+
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 12F))
                 }
             }
