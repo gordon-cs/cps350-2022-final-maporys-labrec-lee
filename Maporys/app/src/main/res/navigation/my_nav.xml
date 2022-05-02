@@ -34,5 +34,9 @@
         android:id="@+id/reviewEntryFragment"
         android:name="com.example.maporys.ReviewEntryFragment"
         android:label="fragment_review_entry"
-        tools:layout="@layout/fragment_review_entry" />
+        tools:layout="@layout/fragment_review_entry" >
+        <action
+            android:id="@+id/reviewEntryFragtoMainFrag"
+            app:destination="@id/mainFragment4" />
+    </fragment>
 </navigation>

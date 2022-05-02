@@ -69,13 +69,16 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
             val action = MainFragmentDirections.mainFragmentToNewEntryFragment(latitude, longitude)
             findNavController().navigate(action)
         }
-        reviewEntryButton.setOnClickListener {
-//            val action = MainFragmentDirections.mainFragmentToReviewEntry()
-//            findNavController().navigate(action)
-        }
+//        reviewEntryButton.setOnClickListener {
+////            val action = MainFragmentDirections.mainFragmentToReviewEntry()
+////            findNavController().navigate(action)
+//        }
     }
 
     override fun onMapReady(googleMap : GoogleMap) {
+        mMap = googleMap
+        enableMyLocation()
+        mMap.uiSettings.isZoomControlsEnabled = true
         displayMarkers(googleMap)
     }
 
@@ -115,9 +118,6 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
 
         return true;
         mMap.uiSettings.isZoomControlsEnabled = true
-        for (location in MainActivity.markerList) {
-//            mMap.addMarker(MarkerOptions().position(location).title("Jenks"))
-        }
         enableMyLocation()
     }
 
