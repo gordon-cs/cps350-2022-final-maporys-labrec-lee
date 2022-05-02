@@ -30,7 +30,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
-    GoogleMap.OnMarkerClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
+    GoogleMap.OnMarkerClickListener, GoogleMap.OnMapLongClickListener,
+    ActivityCompat.OnRequestPermissionsResultCallback {
 
     private var permissionDenied = false
     private lateinit var mMap: GoogleMap
@@ -94,6 +95,7 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
                 mMap.addMarker(MarkerOptions().position(location))
             }
             mMap.setOnMarkerClickListener(this)
+            mMap.setOnMapLongClickListener(this)
         }
     }
 
@@ -198,6 +200,12 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
 
     companion object Markers {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
+    }
+
+    override fun onMapLongClick(location: LatLng) {
+        val action = MainFragmentDirections.mainFragmentToNewEntryFragment(location.latitude.toString(),
+                                                                           location.longitude.toString())
+        findNavController().navigate(action)
     }
 
 }
