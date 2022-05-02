@@ -1,6 +1,7 @@
 package com.example.maporys.data
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -9,11 +10,12 @@ import kotlinx.coroutines.launch
 
 class EntryViewModel(application: Application): AndroidViewModel(application) {
 
-    private val readAllData: LiveData<List<Entry>>
+//    val readAllData: LiveData<List<Entry>>
+    val readAllData: List<Entry>
     private val repository: EntryRepository
 
     init {
-        val entryDao = EntryDatabase.getDatabase(application)!!.entryDao()
+        val entryDao = EntryDatabase.getDatabase(application).entryDao()
         repository = EntryRepository(entryDao)
         readAllData = repository.readAllData
     }
@@ -22,6 +24,12 @@ class EntryViewModel(application: Application): AndroidViewModel(application) {
         // Launch database job from background thread
         viewModelScope.launch(Dispatchers.IO) {
             repository.addEntry(entry)
+            Log.d("add", "done")
         }
+        Log.d("add", "done2")
+    }
+
+    fun getEntriesAtLocation(latQuery : String, lngQuery : String): List<Entry> {
+        return repository.getEntriesAtLocation(latQuery, lngQuery)
     }
 }

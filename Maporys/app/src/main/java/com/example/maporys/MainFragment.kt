@@ -5,13 +5,17 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.maporys.data.Entry
+import com.example.maporys.data.EntryViewModel
 import com.example.maporys.data.EntryDatabase
 import com.example.maporys.databinding.FragmentMainBinding
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -21,12 +25,12 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
-    ActivityCompat.OnRequestPermissionsResultCallback {
+    GoogleMap.OnMarkerClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private var permissionDenied = false
     private lateinit var mMap: GoogleMap
@@ -66,14 +70,50 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
             findNavController().navigate(action)
         }
         reviewEntryButton.setOnClickListener {
-            val action = MainFragmentDirections.mainFragmentToReviewEntry()
-            findNavController().navigate(action)
+//            val action = MainFragmentDirections.mainFragmentToReviewEntry()
+//            findNavController().navigate(action)
         }
     }
 
     override fun onMapReady(googleMap : GoogleMap) {
-        mMap = googleMap
+        displayMarkers(googleMap)
+    }
 
+    fun displayMarkers(mMap : GoogleMap) {
+        lateinit var entries: List<Entry>
+        val entryViewModel = ViewModelProvider(this)[EntryViewModel::class.java]
+
+        Log.d("displayempty", entryViewModel.readAllData.isEmpty().toString())
+        if (!entryViewModel.readAllData.isNullOrEmpty()) {
+            for (entry in entryViewModel.readAllData) {
+                Log.d("display", entry.text.toString())
+                val location = LatLng(entry.lat.toDouble(), entry.lng.toDouble())
+                mMap.addMarker(MarkerOptions().position(location))
+            }
+            mMap.setOnMarkerClickListener(this)
+        }
+    }
+
+    /** Called when the user clicks a marker.
+     *  Opens review entry fragment
+     *  Provides list of entries at that location*/
+    override fun onMarkerClick(marker: Marker): Boolean {
+        Log.d("marker", "click")
+        val location = marker.position
+        val latQuery = location.latitude.toString()
+        val lngQuery = location.longitude.toString()
+
+        val entryViewModel = ViewModelProvider(this)[EntryViewModel::class.java]
+        val locationEntries = entryViewModel.getEntriesAtLocation(latQuery, lngQuery)
+        if (!locationEntries.isNullOrEmpty()) {
+            // Call review entry fragment
+            MainActivity.currentEntries = locationEntries
+        }
+
+        val action = MainFragmentDirections.mainFragmentToReviewEntry()
+        findNavController().navigate(action)
+
+        return true;
         mMap.uiSettings.isZoomControlsEnabled = true
         for (location in MainActivity.markerList) {
 //            mMap.addMarker(MarkerOptions().position(location).title("Jenks"))
@@ -113,6 +153,7 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
                 Manifest.permission.ACCESS_COARSE_LOCATION),
             MainFragment.LOCATION_PERMISSION_REQUEST_CODE
         )
+
     }
     override fun onRequestPermissionsResult(
         requestCode: Int,

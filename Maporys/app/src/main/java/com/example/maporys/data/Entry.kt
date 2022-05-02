@@ -13,5 +13,4 @@ data class Entry (
     val text: String,
     val lat: String,
     val lng: String
-
 )

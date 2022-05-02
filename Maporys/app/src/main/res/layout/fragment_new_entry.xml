@@ -84,6 +84,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:editable="true"
         android:text="42.5884, -70.819063" />
 
     <TextView
