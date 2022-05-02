@@ -12,6 +12,12 @@
         <action
             android:id="@+id/newEntryFragmentToMainFragment"
             app:destination="@id/mainFragment4" />
+        <argument
+            android:name="latitude"
+            app:argType="string" />
+        <argument
+            android:name="longitude"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment4"

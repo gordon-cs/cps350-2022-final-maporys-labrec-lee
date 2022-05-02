@@ -2,11 +2,14 @@ package com.example.maporys
 
 import android.os.Bundle
 import android.util.Log
+import android.text.Editable
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.maporys.data.Entry
 import com.example.maporys.data.EntryViewModel
 import com.google.android.gms.maps.model.LatLng
@@ -17,9 +20,15 @@ import kotlin.concurrent.thread
 class NewEntryFragment : Fragment(R.layout.fragment_new_entry) {
 
     private lateinit var  mEntryViewModel: EntryViewModel
+    private val args: NewEntryFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val newString = args.latitude + ", " + args.longitude
+        locationText.text = newString.toEditable()
+
+        mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java)
 
         cancelButton.setOnClickListener {
             val action = NewEntryFragmentDirections.newEntryFragmentToMainFragment()
@@ -56,4 +65,6 @@ class NewEntryFragment : Fragment(R.layout.fragment_new_entry) {
         mEntryViewModel.addEntry(entry)
         Log.d("newfrag", "should be inserted")
     }
+
+    private fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
 }
