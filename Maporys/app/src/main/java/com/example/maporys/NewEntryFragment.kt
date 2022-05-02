@@ -46,7 +46,7 @@ class NewEntryFragment : Fragment(R.layout.fragment_new_entry) {
 
         val date = dateText.text.toString()
         val text = entryInputMultiLine.text.toString()
-        val locVals = locationText.text.toString().split(", ")
+        val locVals = locationText.text.split(", ")
         val lat = locVals[0]
         val long = locVals[1]
 

@@ -29,7 +29,7 @@ class EntryViewModel(application: Application): AndroidViewModel(application) {
         Log.d("add", "done2")
     }
 
-//    fun getEntries(): List<Entry>? {
-//        return readAllData.value
-//    }
+    fun getEntriesAtLocation(latQuery : String, lngQuery : String): List<Entry> {
+        return repository.getEntriesAtLocation(latQuery, lngQuery)
+    }
 }

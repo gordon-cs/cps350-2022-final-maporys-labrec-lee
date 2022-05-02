@@ -9,4 +9,8 @@ class EntryRepository(private val entryDao: EntryDao) {
     fun addEntry(entry: Entry) {
         entryDao.addEntry(entry)
     }
+
+    fun getEntriesAtLocation(latQuery : String, lngQuery : String) : List<Entry> {
+        return entryDao.getEntriesAtLocation(latQuery, lngQuery)
+    }
 }
