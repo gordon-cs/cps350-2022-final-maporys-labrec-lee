@@ -29,7 +29,7 @@ class NewEntryFragment : Fragment(R.layout.fragment_new_entry) {
         val currentDateTimeString: String = DateFormat.getDateTimeInstance().format(Date())
         dateText.text = currentDateTimeString
 
-        mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java)
+        mEntryViewModel = ViewModelProvider(this)[EntryViewModel::class.java]
 
         cancelButton.setOnClickListener {
             val action = NewEntryFragmentDirections.newEntryFragmentToMainFragment()
