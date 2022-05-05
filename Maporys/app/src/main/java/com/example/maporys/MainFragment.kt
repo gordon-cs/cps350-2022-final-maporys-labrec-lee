@@ -49,9 +49,6 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
     private var longitude = "0.0"
     private lateinit var mMap: GoogleMap
     private lateinit var lastLocation: Location
-    private var mGoogleApiClient: GoogleApiClient? = null
-    private lateinit var mLocationRequest: com.google.android.gms.location.LocationRequest
-    private var mCurrLocationMarker: Marker? = null
 
 
     override fun onCreateView (
