@@ -27,6 +27,16 @@
         android:layout_marginBottom="64dp"
         android:text="@string/save_entry" />
 
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="495dp"
+        android:text="@string/search" />
+
     <EditText
         android:id="@+id/entryInputMultiLine"
         android:layout_width="317dp"

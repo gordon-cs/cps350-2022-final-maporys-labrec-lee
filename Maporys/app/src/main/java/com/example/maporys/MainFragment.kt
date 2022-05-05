@@ -3,12 +3,14 @@ package com.example.maporys
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.location.Location
+import android.location.*
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -18,28 +20,38 @@ import com.example.maporys.data.Entry
 import com.example.maporys.data.EntryViewModel
 import com.example.maporys.data.EntryDatabase
 import com.example.maporys.databinding.FragmentMainBinding
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApi
+import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_new_entry.*
+import java.io.IOException
 
 class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
     GoogleMap.OnMarkerClickListener, GoogleMap.OnMapLongClickListener,
-    ActivityCompat.OnRequestPermissionsResultCallback {
+    ActivityCompat.OnRequestPermissionsResultCallback{
 
     private var permissionDenied = false
-    private lateinit var mMap: GoogleMap
     private var db: EntryDatabase? = null
-    private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient : FusedLocationProviderClient
     private var latitude = "0.0"
     private var longitude = "0.0"
+    private lateinit var mMap: GoogleMap
+    private lateinit var lastLocation: Location
+    private var mGoogleApiClient: GoogleApiClient? = null
+    private lateinit var mLocationRequest: com.google.android.gms.location.LocationRequest
+    private var mCurrLocationMarker: Marker? = null
 
 
     override fun onCreateView (
@@ -118,9 +130,9 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
         val action = MainFragmentDirections.mainFragmentToReviewEntry()
         findNavController().navigate(action)
 
-        return true;
         mMap.uiSettings.isZoomControlsEnabled = true
         enableMyLocation()
+        return true;
     }
 
     /**
