@@ -1,59 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:paddingStart="32dp"
+android:paddingEnd="32dp"
+tools:context=".NewEntryFragment">
+
+<Button
+    android:id="@+id/homeButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginEnd="116dp"
+    android:layout_marginBottom="64dp"
+    android:fontFamily="@font/alegreya"
+    android:text="Home"
+    android:textSize="18dp" />
+
+<TextView
+    android:id="@+id/entryInputMultiLine"
+    android:layout_width="317dp"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/textTitle"
+    android:layout_alignParentStart="true"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="32dp"
+    android:ems="10"
+    android:fontFamily="@font/alegreya"
+    android:gravity="start|top"
+    android:importantForAutofill="no"
+    android:inputType="textMultiLine"
+    android:minHeight="48dp"
     android:paddingStart="32dp"
-    android:paddingEnd="32dp"
-    tools:context=".ReviewEntryFragment">
+    android:paddingEnd="16dp"
+    android:textSize="18dp"
+    tools:ignore="SpeakableTextPresentCheck" />
 
-    <Button
-        android:id="@+id/homeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="Back" />
+<TextView
+    android:id="@+id/locationTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="128dp"
+    android:fontFamily="@font/alegreya"
+    android:text="@string/location"
+    android:textSize="24dp"
+    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/entryInputMultiLine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:importantForAutofill="no"
-        android:inputType="textMultiLine"
-        android:minHeight="48dp"
-        android:paddingStart="32dp"
-        android:paddingEnd="16dp"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/locationTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="128dp"
-        android:text="@string/location"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/dateTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/locationText"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/date"
-        android:textStyle="bold" />
+<TextView
+    android:id="@+id/dateTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/locationText"
+    android:layout_alignParentStart="true"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="32dp"
+    android:fontFamily="@font/alegreya"
+    android:text="@string/date"
+    android:textSize="24dp"
+    android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textTitle"
@@ -62,35 +73,62 @@
         android:layout_below="@+id/dateText"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:fontFamily="@font/alegreya"
         android:text="@string/text"
+        android:textSize="24dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/locationText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/locationTitle"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp" />
+<TextView
+    android:id="@+id/locationText"
+    android:layout_width="200dp"
+    android:layout_height="61dp"
+    android:layout_below="@+id/locationTitle"
+    android:layout_alignParentStart="true"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="32dp"
+    android:editable="true"
+    android:fontFamily="@font/alegreya"
+    android:text="42.5884, -70.819063"
+    android:textSize="18dp" />
 
-    <TextView
-        android:id="@+id/dateText"
+<TextView
+    android:id="@+id/dateText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/dateTitle"
+    android:layout_alignParentStart="true"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="32dp"
+    android:fontFamily="@font/alegreya"
+    android:textSize="18dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dateTitle"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/_5_4_22" />
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-49dp"
+        android:rotation="90"
+        android:scaleX="100"
+        android:scaleY=".1"
+        android:src="@drawable/common_google_signin_btn_text_light_normal"
+        app:tint="#726854" />
 
     <ImageButton
         android:id="@+id/olderButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/homeButton"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginBottom="100dp"
-        android:src="?attr/homeAsUpIndicator" />
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#F9E3B8"
+        android:foregroundTint="#726854"
+        android:foregroundTintMode="multiply"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:src="@android:drawable/ic_media_rew"
+        android:tint="#726854"
+        android:tintMode="multiply" />
 </RelativeLayout>
