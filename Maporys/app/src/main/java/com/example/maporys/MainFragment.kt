@@ -207,7 +207,7 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
         return false
     }
 
-    companion object Markers {
+    companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
 
