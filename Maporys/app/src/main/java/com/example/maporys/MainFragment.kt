@@ -48,8 +48,6 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
     private var latitude = "0.0"
     private var longitude = "0.0"
     private lateinit var mMap: GoogleMap
-    private lateinit var lastLocation: Location
-
 
     override fun onCreateView (
         inflater: LayoutInflater,
@@ -70,7 +68,6 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         return view
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -144,8 +141,21 @@ class MainFragment : Fragment(R.layout.fragment_main), OnMapReadyCallback,
         {
             mMap.isMyLocationEnabled = true
             fusedLocationClient.lastLocation.addOnSuccessListener(requireActivity()) { location ->
-                if (location != null) {
-                    lastLocation = location
+                if (location == null) {
+                    MainActivity.lastLocation = location
+                    val currentLatLong = location?.latitude?.let { LatLng(it.toDouble(),
+                        location.longitude
+                    ) }
+
+                    latitude = MainActivity.lastLocation.latitude.toString()
+                    longitude = MainActivity.lastLocation.longitude.toString()
+
+                    val zoomTo = LatLng(MainActivity.lastLocation.latitude,
+                                        MainActivity.lastLocation.longitude)
+
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zoomTo, 12F))
+                } else {
+                    MainActivity.lastLocation = location
                     val currentLatLong = LatLng(location.latitude, location.longitude)
 
                     latitude = location.latitude.toString()

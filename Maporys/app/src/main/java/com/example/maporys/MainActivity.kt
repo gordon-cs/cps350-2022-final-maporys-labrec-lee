@@ -1,5 +1,6 @@
 package com.example.maporys
 
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private var db: EntryDatabase? = null
     var entryViewModel : List<Entry> = listOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,6 +42,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     companion object {
         lateinit var currentEntries : List<Entry>
+        lateinit var lastLocation: Location
     }
-
 }
